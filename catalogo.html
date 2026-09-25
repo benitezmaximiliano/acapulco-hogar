@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo · Acapulco Hogar</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#fffaf1">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="catalog">
+<!--
+  Esta única página muestra TODAS las categorías:
+    catalogo.html?c=sillas   catalogo.html?c=banquetas   catalogo.html?c=mesas ...
+  Los productos se cargan desde data/data.js (no hace falta editar este archivo).
+-->
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <img class="ico" src="assets/img/logo-icon-dark.png" alt="" width="54" height="54">
+      <h1 id="pageTitle">Catálogo</h1>
+      <div class="rule"><i></i></div>
+      <p id="pageDesc"></p>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <div class="wrap toolbar-in">
+      <nav class="chips" id="chips" aria-label="Categorías"></nav>
+      <label class="search">
+        <span class="sr-only">Buscar modelo</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Buscar modelo…" autocomplete="off">
+      </label>
+    </div>
+  </div>
+
+  <p class="wrap price-note">Precios mayoristas por unidad, en pesos argentinos. Los presupuestos tienen vigencia de 24 hs. <a href="info.html" style="color:var(--olive-d)">Ver condiciones de compra y envío</a>.</p>
+
+  <div id="catalogBody"></div>
+
+  <section class="section">
+    <div class="wrap" style="text-align:center">
+      <h2 style="font-size:clamp(2rem,5vw,3rem)">¿Buscás algo en particular?</h2>
+      <p style="color:var(--muted);max-width:34em;margin:.8rem auto 1.4rem">Escribinos y te ayudamos a armar tu pedido, con medidas y colores a elección.</p>
+      <a class="btn btn-wa" data-wa data-msg="Hola! Quiero armar un pedido mayorista.">Escribinos por WhatsApp</a>
+    </div>
+  </section>
+</main>
+<script src="data/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
