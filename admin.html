@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de productos · Acapulco Hogar</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#fffaf1">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .adm{max-width:980px;margin:0 auto;padding:1.2rem 1rem 4rem}
+    .adm-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:.4rem 0 1rem;border-bottom:1px solid var(--line);margin-bottom:1.4rem}
+    .adm-top h1{font-family:var(--font-display);font-size:clamp(1.6rem,5vw,2.2rem);margin:0;font-weight:600;color:var(--olive-d);line-height:1.1}
+    .adm-top a{color:var(--olive-d);font-size:.95rem}
+    .box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);margin-bottom:1.6rem}
+    .box h2{font-family:var(--font-display);font-size:1.6rem;margin:0 0 .3rem;color:var(--olive-d);font-weight:600}
+    .box p.help{margin:.2rem 0 1rem;color:var(--muted);font-size:.95rem}
+    .box ol{padding-left:1.2rem;color:var(--muted);font-size:.95rem;line-height:1.6}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .grid .full{grid-column:1/-1}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    label.f{display:block;font-weight:500;font-size:.92rem;color:var(--ink)}
+    label.f small{font-weight:400;color:var(--muted)}
+    .f input[type=text],.f input[type=password],.f input[type=number],.f select,.f textarea{width:100%;margin-top:.3rem;padding:.7rem .85rem;font:inherit;font-size:1rem;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:12px;transition:border-color .2s,box-shadow .2s}
+    .f textarea{min-height:96px;resize:vertical}
+    .f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(133,114,81,.18)}
+    .chk{display:flex;align-items:center;gap:.55rem;font-size:.95rem;cursor:pointer}
+    .chk input{width:18px;height:18px;accent-color:var(--olive)}
+    .drop{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;border:2px dashed var(--olive-l);border-radius:14px;padding:1rem;background:var(--cream);cursor:pointer;transition:background .2s,border-color .2s}
+    .drop:hover,.drop.over{background:var(--sand);border-color:var(--olive)}
+    .drop img{width:110px;height:110px;object-fit:cover;border-radius:12px;display:none}
+    .drop img.on{display:block}
+    .drop span{color:var(--muted);font-size:.95rem}
+    .drop input{display:none}
+    .row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:1.1rem}
+    .btn-s{border:0;font:inherit;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--olive-d);border:1.5px solid var(--olive-l)}
+    .btn[disabled]{opacity:.55;cursor:wait}
+    .msg{margin-top:1rem;padding:.8rem 1rem;border-radius:12px;font-size:.95rem;display:none}
+    .msg.on{display:block}
+    .msg.ok{background:#e6f5ea;color:#1c5a2c;border:1px solid #b9e0c3}
+    .msg.err{background:#fde8e6;color:#8a2a1f;border:1px solid #f3c1bb}
+    .msg.info{background:var(--sand);color:var(--olive-d);border:1px solid var(--line)}
+    .list{display:grid;gap:.6rem;margin-top:1rem}
+    .it{display:grid;grid-template-columns:56px 1fr auto;gap:.8rem;align-items:center;padding:.5rem;border:1px solid var(--line);border-radius:14px;background:var(--cream)}
+    .it img{width:56px;height:56px;object-fit:cover;border-radius:10px;background:var(--sand)}
+    .it b{display:block;font-weight:500;line-height:1.25}
+    .it small{color:var(--muted)}
+    .it .acts{display:flex;gap:.4rem}
+    .it .acts button{padding:.45rem .8rem;border-radius:999px;border:1.5px solid var(--olive-l);background:#fff;color:var(--olive-d);font:inherit;font-size:.85rem;cursor:pointer}
+    .it .acts button.del{border-color:#d9a29b;color:#9a3327}
+    .catlbl{margin:1.2rem 0 .1rem;font-family:var(--font-display);font-size:1.25rem;color:var(--olive-d)}
+    .editing{border-color:var(--olive)!important;box-shadow:0 0 0 3px rgba(133,114,81,.2),var(--shadow)}
+    .tokline{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+    details summary{cursor:pointer;color:var(--olive-d);font-weight:500;margin:.4rem 0}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+<div class="adm">
+  <div class="adm-top">
+    <h1>Panel de productos</h1>
+    <div class="tokline">
+      <a href="index.html" target="_blank" rel="noopener">Ver el sitio ↗</a>
+      <a href="#" id="logout" hidden>Cerrar sesión</a>
+    </div>
+  </div>
+
+  <!-- 1) Conexión (solo la primera vez) -->
+  <section class="box" id="setup" hidden>
+    <h2>Conectar con GitHub</h2>
+    <p class="help">Esto se hace una sola vez en cada computadora o celular. El permiso queda guardado solo en este navegador.</p>
+    <ol>
+      <li>Entrá a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> (con la cuenta dueña del sitio).</li>
+      <li>Ponele un nombre (ej. “Panel Acapulco Hogar”) y elegí vencimiento de 1 año.</li>
+      <li>En <em>Repository access</em> elegí <em>Only select repositories</em> y marcá <strong id="repoName">acapulco-hogar</strong>.</li>
+      <li>En <em>Permissions → Repository permissions</em> poné <em>Contents: Read and write</em>.</li>
+      <li>Tocá <em>Generate token</em>, copiá el código (empieza con <code>github_pat_</code>) y pegalo acá abajo.</li>
+    </ol>
+    <form id="setupForm" class="grid" autocomplete="off">
+      <label class="f full">Código de acceso (token)
+        <input type="password" id="tok" placeholder="github_pat_..." required autocomplete="off">
+      </label>
+      <details class="full">
+        <summary>Datos del repositorio (ya vienen completos)</summary>
+        <div class="grid">
+          <label class="f">Usuario o cuenta <input type="text" id="own" required></label>
+          <label class="f">Repositorio <input type="text" id="rep" required></label>
+        </div>
+      </details>
+      <div class="full row" style="margin-top:0">
+        <button class="btn btn-s" id="setupBtn" type="submit">Conectar</button>
+      </div>
+    </form>
+    <div class="msg" id="setupMsg"></div>
+  </section>
+
+  <!-- 2) Formulario -->
+  <section class="box" id="formBox" hidden>
+    <h2 id="formTitle">Agregar un producto</h2>
+    <p class="help" id="formHelp">Completá los datos y subí una foto. En 1 o 2 minutos aparece en el catálogo.</p>
+    <form id="pf" class="grid" autocomplete="off">
+      <label class="f">Categoría
+        <select id="cat" required></select>
+      </label>
+      <label class="f" id="secWrap">Sección
+        <select id="sec"></select>
+      </label>
+      <label class="f full">Título del producto
+        <input type="text" id="name" maxlength="90" placeholder="Ej: Silla Tulum Clásica" required>
+      </label>
+      <label class="f full">Descripción <small>(opcional)</small>
+        <textarea id="desc" maxlength="500" placeholder="Ej: Tejida a mano en soga símil yute, estructura de hierro pintada al horno."></textarea>
+      </label>
+      <label class="f">Precio por unidad <small>(en pesos, sin puntos)</small>
+        <input type="number" id="price" min="0" step="1" inputmode="numeric" placeholder="Ej: 39370">
+      </label>
+      <label class="f">O texto en lugar del precio
+        <input type="text" id="ptext" maxlength="60" placeholder="Ej: A medida · consultar">
+      </label>
+      <div class="full">
+        <div class="drop" id="drop" tabindex="0" role="button" aria-label="Elegir foto">
+          <img id="prev" alt="">
+          <span id="dropTxt"><strong>Tocá para elegir la foto</strong><br>o arrastrala hasta acá (JPG, PNG o foto del celular)</span>
+          <input type="file" id="file" accept="image/*">
+        </div>
+      </div>
+      <details class="full">
+        <summary>Más opciones</summary>
+        <div class="grid" style="margin-top:.6rem">
+          <label class="f full">Medidas <small>(opcional)</small>
+            <input type="text" id="dims" maxlength="120" placeholder="Ej: 42 ancho × 88 alto × 45 prof">
+          </label>
+          <label class="chk"><input type="checkbox" id="sinIva"> El precio es sin IVA</label>
+          <label class="chk"><input type="checkbox" id="featured"> Mostrar en el inicio (destacado)</label>
+        </div>
+      </details>
+      <div class="full">
+        <div class="row" style="margin-top:0">
+          <button class="btn btn-s" type="submit" id="saveBtn">Publicar producto</button>
+          <button class="btn ghost btn-s" type="button" id="cancelEdit" hidden>Cancelar edición</button>
+        </div>
+        <div class="msg" id="msg"></div>
+      </div>
+    </form>
+  </section>
+
+  <!-- 3) Listado -->
+  <section class="box" id="listBox" hidden>
+    <h2>Productos cargados</h2>
+    <p class="help">Tocá “Editar” para cambiar precio, texto o foto, o “Eliminar” para sacarlo del catálogo.</p>
+    <label class="f"><input type="text" id="q" placeholder="Buscar por nombre..."></label>
+    <div id="list"></div>
+    <div class="msg" id="listMsg"></div>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var LS = 'ah_admin_v1';
+  var DATA_PATH = 'data/data.js';
+  var IMG_DIR = 'assets/img/';
+  var cfg = { owner: '', repo: '', branch: 'main', token: '' };
+  var D = null;            // datos actuales del catálogo
+  var editingId = null;
+  var photo = null;        // { base64, url } de la foto nueva elegida
+
+  /* ---------- utilidades ---------- */
+  function lsGet() { try { return JSON.parse(localStorage.getItem(LS) || 'null'); } catch (e) { return null; } }
+  function lsSet(v) { try { localStorage.setItem(LS, JSON.stringify(v)); } catch (e) {} }
+  function lsDel() { try { localStorage.removeItem(LS); } catch (e) {} }
+  function slug(s) {
+    return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'producto';
+  }
+  function money(n) { return '$' + Number(n).toLocaleString('es-AR'); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function show(el, type, text) { el.className = 'msg on ' + type; el.textContent = text; }
+  function hide(el) { el.className = 'msg'; el.textContent = ''; }
+
+  function guessRepo() {
+    var h = location.hostname, m = h.match(/^(.+)\.github\.io$/);
+    if (m) return { owner: m[1], repo: location.pathname.split('/').filter(Boolean)[0] || (m[1] + '.github.io') };
+    return { owner: '', repo: 'acapulco-hogar' };
+  }
+
+  /* ---------- API de GitHub ---------- */
+  function gh(path, opts) {
+    opts = opts || {};
+    var headers = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + cfg.token, 'X-GitHub-Api-Version': '2022-11-28' };
+    if (opts.body) headers['Content-Type'] = 'application/json';
+    return fetch('https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + path, {
+      method: opts.method || 'GET', headers: headers, body: opts.body ? JSON.stringify(opts.body) : undefined, cache: 'no-store'
+    }).then(function (r) {
+      if (!r.ok) {
+        return r.text().then(function (t) { var e = new Error('GitHub ' + r.status); e.status = r.status; e.body = t; throw e; });
+      }
+      return r.json();
+    });
+  }
+  function friendly(e) {
+    if (e && e.status === 401) return 'El código de acceso no es válido o venció. Cerrá sesión y volvé a conectar.';
+    if (e && e.status === 403) return 'GitHub rechazó el permiso. Revisá que el token tenga “Contents: Read and write” sobre este repositorio.';
+    if (e && e.status === 404) return 'No se encontró el repositorio o el token no tiene acceso a él.';
+    if (e && e.status === 422) return 'GitHub no pudo aplicar el cambio (puede que alguien más haya guardado al mismo tiempo). Probá de nuevo.';
+    if (e && e.message && /Failed to fetch|NetworkError/.test(e.message)) return 'No hay conexión con GitHub. Revisá tu internet e intentá de nuevo.';
+    return 'Ocurrió un error: ' + (e && e.message ? e.message : e);
+  }
+
+  function b64ToUtf8(b64) {
+    var bin = atob(b64.replace(/\s/g, '')), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder('utf-8').decode(bytes);
+  }
+
+  function loadData() {
+    return gh('/contents/' + DATA_PATH + '?ref=' + encodeURIComponent(cfg.branch)).then(function (f) {
+      var txt = b64ToUtf8(f.content);
+      var w = {};
+      new Function('window', txt)(w);
+      if (!w.AH_DATA || !w.AH_DATA.products) throw new Error('No se pudo leer data/data.js');
+      return w.AH_DATA;
+    });
+  }
+
+  /* ---------- serializar data.js (mismo formato legible que el original) ---------- */
+  function serialize(d) {
+    var j = function (x) { return JSON.stringify(x); };
+    var out = '/* Datos del catálogo de Acapulco Hogar. Editá acá precios, nombres y textos. */\n';
+    out += 'window.AH_DATA = {\n';
+    out += '  contact: ' + JSON.stringify(d.contact, null, 4).replace(/\n/g, '\n  ') + ',\n';
+    out += '  standardMaterials: ' + j(d.standardMaterials) + ',\n';
+    out += '  categories: [\n' + d.categories.map(function (c) { return '    ' + j(c); }).join(',\n') + '\n  ],\n';
+    out += '  sections: {\n' + Object.keys(d.sections).map(function (k) { return '    ' + j(k) + ': ' + j(d.sections[k]); }).join(',\n') + '\n  },\n';
+    out += '  products: [\n' + d.products.map(function (p) { return '    ' + j(p); }).join(',\n') + '\n  ]\n};\n';
+    return out;
+  }
+
+  /* ---------- commit atómico (foto + data.js en un solo cambio) ---------- */
+  function commit(message, dataText, imgPath, imgB64) {
+    var b = encodeURIComponent(cfg.branch), parent, baseTree;
+    return gh('/git/ref/heads/' + b).then(function (ref) {
+      parent = ref.object.sha;
+      return gh('/git/commits/' + parent);
+    }).then(function (c) {
+      baseTree = c.tree.sha;
+      var jobs = [gh('/git/blobs', { method: 'POST', body: { content: dataText, encoding: 'utf-8' } })];
+      if (imgB64) jobs.push(gh('/git/blobs', { method: 'POST', body: { content: imgB64, encoding: 'base64' } }));
+      return Promise.all(jobs);
+    }).then(function (blobs) {
+      var tree = [{ path: DATA_PATH, mode: '100644', type: 'blob', sha: blobs[0].sha }];
+      if (imgB64) tree.push({ path: IMG_DIR + imgPath, mode: '100644', type: 'blob', sha: blobs[1].sha });
+      return gh('/git/trees', { method: 'POST', body: { base_tree: baseTree, tree: tree } });
+    }).then(function (t) {
+      return gh('/git/commits', { method: 'POST', body: { message: message, tree: t.sha, parents: [parent] } });
+    }).then(function (c) {
+      return gh('/git/refs/heads/' + b, { method: 'PATCH', body: { sha: c.sha } });
+    });
+  }
+
+  /* ---------- foto: se achica y comprime en el navegador ---------- */
+  function processImage(file) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        var max = 1400, w = img.naturalWidth, h = img.naturalHeight, s = Math.min(1, max / Math.max(w, h));
+        var c = document.createElement('canvas');
+        c.width = Math.round(w * s); c.height = Math.round(h * s);
+        var x = c.getContext('2d');
+        x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+        x.drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        var data = c.toDataURL('image/jpeg', 0.84);
+        resolve({ url: data, base64: data.split(',')[1] });
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('No se pudo leer la imagen. Probá con otra foto (JPG o PNG).')); };
+      img.src = url;
+    });
+  }
+
+  /* ---------- pantalla ---------- */
+  function fillCats() {
+    $('#cat').innerHTML = D.categories.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.title) + '</option>'; }).join('');
+    fillSecs();
+  }
+  function fillSecs(sel) {
+    var secs = D.sections[$('#cat').value] || [];
+    $('#sec').innerHTML = secs.map(function (s) { return '<option value="' + esc(s.id) + '">' + esc(s.title) + '</option>'; }).join('');
+    $('#secWrap').hidden = secs.length < 2;
+    if (sel) $('#sec').value = sel;
+  }
+
+  function renderList() {
+    var q = $('#q').value.trim().toLowerCase(), html = '';
+    D.categories.forEach(function (c) {
+      var items = D.products.filter(function (p) { return p.cat === c.id && (!q || p.name.toLowerCase().indexOf(q) > -1); });
+      if (!items.length) return;
+      html += '<div class="catlbl">' + esc(c.title) + ' (' + items.length + ')</div><div class="list">';
+      items.forEach(function (p) {
+        html += '<div class="it' + (p.id === editingId ? ' editing' : '') + '"><img src="' + IMG_DIR + esc(p.img) + '" alt="" loading="lazy">' +
+          '<div><b>' + esc(p.name) + '</b><small>' + (p.price != null ? money(p.price) : esc(p.priceText || 'Consultar precio')) + (p.featured ? ' · destacado' : '') + '</small></div>' +
+          '<div class="acts"><button type="button" data-a="edit" data-id="' + esc(p.id) + '">Editar</button><button type="button" class="del" data-a="del" data-id="' + esc(p.id) + '">Eliminar</button></div></div>';
+      });
+      html += '</div>';
+    });
+    $('#list').innerHTML = html || '<p class="help">No hay productos que coincidan.</p>';
+  }
+
+  function resetForm() {
+    editingId = null; photo = null;
+    $('#pf').reset(); fillSecs();
+    $('#prev').className = ''; $('#prev').removeAttribute('src');
+    $('#dropTxt').innerHTML = '<strong>Tocá para elegir la foto</strong><br>o arrastrala hasta acá (JPG, PNG o foto del celular)';
+    $('#formTitle').textContent = 'Agregar un producto';
+    $('#formHelp').textContent = 'Completá los datos y subí una foto. En 1 o 2 minutos aparece en el catálogo.';
+    $('#saveBtn').textContent = 'Publicar producto';
+    $('#cancelEdit').hidden = true;
+    renderList();
+  }
+
+  function startEdit(id) {
+    var p = D.products.filter(function (x) { return x.id === id; })[0];
+    if (!p) return;
+    resetForm();
+    editingId = id;
+    $('#cat').value = p.cat; fillSecs(p.sec);
+    $('#name').value = p.name; $('#desc').value = p.desc || '';
+    $('#price').value = p.price != null ? p.price : ''; $('#ptext').value = p.priceText || '';
+    $('#dims').value = p.dims || ''; $('#sinIva').checked = !!p.sinIva; $('#featured').checked = !!p.featured;
+    $('#prev').src = IMG_DIR + p.img; $('#prev').className = 'on';
+    $('#dropTxt').innerHTML = 'Foto actual. <strong>Tocá para cambiarla</strong>';
+    $('#formTitle').textContent = 'Editar producto';
+    $('#formHelp').textContent = 'Cambiá lo que necesites y guardá. Si no elegís una foto nueva, se mantiene la actual.';
+    $('#saveBtn').textContent = 'Guardar cambios';
+    $('#cancelEdit').hidden = false;
+    if (p.dims || p.sinIva || p.featured) document.querySelector('#pf details').open = true;
+    renderList();
+    $('#formBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function enter() {
+    $('#setup').hidden = true;
+    $('#formBox').hidden = false; $('#listBox').hidden = false; $('#logout').hidden = false;
+    fillCats(); renderList();
+  }
+
+  function connect() {
+    var m = $('#setupMsg');
+    show(m, 'info', 'Conectando…');
+    return loadData().then(function (d) {
+      D = d; lsSet(cfg); hide(m); enter();
+    }).catch(function (e) {
+      show(m, 'err', friendly(e));
+    });
+  }
+
+  /* ---------- eventos ---------- */
+  $('#setupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    cfg.token = $('#tok').value.trim(); cfg.owner = $('#own').value.trim(); cfg.repo = $('#rep').value.trim();
+    $('#repoName').textContent = cfg.repo;
+    connect();
+  });
+  $('#logout').addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!confirm('¿Cerrar sesión en este navegador? Vas a tener que pegar el código de acceso otra vez.')) return;
+    lsDel(); location.reload();
+  });
+  $('#cat').addEventListener('change', function () { fillSecs(); });
+  $('#q').addEventListener('input', renderList);
+
+  var drop = $('#drop'), file = $('#file');
+  drop.addEventListener('click', function () { file.click(); });
+  drop.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); file.click(); } });
+  ['dragenter', 'dragover'].forEach(function (n) { drop.addEventListener(n, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (n) { drop.addEventListener(n, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files[0]) pick(e.dataTransfer.files[0]); });
+  file.addEventListener('change', function () { if (file.files[0]) pick(file.files[0]); });
+  function pick(f) {
+    if (!/^image\//.test(f.type)) { show($('#msg'), 'err', 'El archivo tiene que ser una imagen.'); return; }
+    hide($('#msg'));
+    processImage(f).then(function (r) {
+      photo = r; $('#prev').src = r.url; $('#prev').className = 'on';
+      $('#dropTxt').innerHTML = '<strong>' + esc(f.name) + '</strong><br>Tocá para elegir otra';
+    }).catch(function (e) { show($('#msg'), 'err', e.message); });
+  }
+
+  $('#cancelEdit').addEventListener('click', function () { hide($('#msg')); resetForm(); });
+
+  $('#list').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-a]'); if (!b) return;
+    if (b.dataset.a === 'edit') { startEdit(b.dataset.id); return; }
+    var p = D.products.filter(function (x) { return x.id === b.dataset.id; })[0];
+    if (!p || !confirm('¿Eliminar “' + p.name + '” del catálogo?')) return;
+    var lm = $('#listMsg'); show(lm, 'info', 'Eliminando…');
+    loadData().then(function (fresh) {
+      fresh.products = fresh.products.filter(function (x) { return x.id !== p.id; });
+      return commit('Catálogo: elimina ' + p.name, serialize(fresh)).then(function () { D = fresh; });
+    }).then(function () {
+      if (editingId === p.id) resetForm(); else renderList();
+      show(lm, 'ok', 'Listo. “' + p.name + '” se quitó del catálogo. El sitio se actualiza en 1 o 2 minutos.');
+    }).catch(function (err) { show(lm, 'err', friendly(err)); });
+  });
+
+  $('#pf').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var m = $('#msg'), btn = $('#saveBtn');
+    var name = $('#name').value.trim(), cat = $('#cat').value;
+    var priceRaw = $('#price').value.trim(), ptext = $('#ptext').value.trim();
+    if (!name) { show(m, 'err', 'Falta el título del producto.'); return; }
+    if (!editingId && !photo) { show(m, 'err', 'Falta la foto del producto.'); return; }
+    if (priceRaw === '' && !ptext) { show(m, 'err', 'Poné un precio, o un texto como “Consultar precio”.'); return; }
+    btn.disabled = true; show(m, 'info', 'Publicando… no cierres esta página.');
+
+    loadData().then(function (fresh) {
+      var p, imgName = null, secs = fresh.sections[cat] || [];
+      if (editingId) {
+        p = fresh.products.filter(function (x) { return x.id === editingId; })[0];
+        if (!p) throw new Error('Ese producto ya no existe en el catálogo.');
+      } else {
+        var base = slug(cat + '-' + name), id = base, n = 2;
+        while (fresh.products.some(function (x) { return x.id === id; })) id = base + '-' + (n++);
+        p = { id: id, cat: cat, name: name, img: '' };
+        fresh.products.push(p);
+      }
+      if (photo) { imgName = slug(cat + '-' + name).slice(0, 40) + '-' + Date.now().toString(36) + '.jpg'; p.img = imgName; }
+      p.cat = cat; p.name = name;
+      p.sec = $('#sec').value || (secs[0] && secs[0].id) || undefined;
+      if (priceRaw !== '') { p.price = Math.round(Number(priceRaw)); delete p.priceText; }
+      else { delete p.price; delete p.duo; p.priceText = ptext; }
+      if (priceRaw !== '' && ptext) p.priceText = ptext;
+      var set = function (k, v) { if (v) p[k] = v; else delete p[k]; };
+      set('desc', $('#desc').value.trim()); set('dims', $('#dims').value.trim());
+      set('sinIva', $('#sinIva').checked); set('featured', $('#featured').checked);
+      if (p.sec === undefined) delete p.sec;
+      var verb = editingId ? 'actualiza' : 'agrega';
+      return commit('Catálogo: ' + verb + ' ' + name, serialize(fresh), imgName, photo && photo.base64).then(function () { D = fresh; });
+    }).then(function () {
+      var wasEdit = !!editingId;
+      resetForm();
+      show(m, 'ok', wasEdit ? '¡Cambios guardados! Se van a ver en el catálogo en 1 o 2 minutos.' : '¡Producto publicado! Se va a ver en el catálogo en 1 o 2 minutos.');
+    }).catch(function (err) { show(m, 'err', friendly(err)); })
+      .then(function () { btn.disabled = false; });
+  });
+
+  /* ---------- inicio ---------- */
+  var g = guessRepo(), saved = lsGet();
+  if (saved && saved.token) {
+    cfg = saved; $('#repoName').textContent = cfg.repo;
+    show($('#setupMsg'), 'info', 'Cargando…'); $('#setup').hidden = false;
+    connect().then(function () { if (!D) { $('#setup').hidden = false; } });
+  } else {
+    cfg.owner = g.owner; cfg.repo = g.repo;
+    if (!cfg.owner) document.querySelector('#setupForm details').open = true;
+    $('#own').value = cfg.owner; $('#rep').value = cfg.repo; $('#repoName').textContent = cfg.repo;
+    $('#setup').hidden = false;
+  }
+})();
+</script>
+</body>
+</html>
