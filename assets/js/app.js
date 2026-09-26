@@ -137,6 +137,7 @@
       '<img src="' + IMG + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\')"></button>' +
       '<div class="card-body"><h3>' + esc(p.name) + '</h3>' +
       (p.dims ? '<p class="dims">' + esc(p.dims) + '</p>' : '') +
+      (p.desc ? '<p class="desc">' + esc(p.desc) + '</p>' : '') +
       (chips.length ? '<ul class="notes">' + chips.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>' : '') +
       '<div class="price">' + priceHtml(p) + '</div>' +
       '<a class="btn btn-wa btn-sm" href="' + wa(msg) + '" target="_blank" rel="noopener">' + I.wa + 'Consultar</a></div></article>';
@@ -264,7 +265,7 @@
         defs.forEach(function (s) {
           var items = all.filter(function (p) {
             var inSec = s.id === '__otros' ? known.indexOf(p.sec) < 0 : p.sec === s.id;
-            return inSec && (!query || norm(p.name + ' ' + (p.dims || '')).indexOf(query) > -1);
+            return inSec && (!query || norm(p.name + ' ' + (p.dims || '') + ' ' + (p.desc || '')).indexOf(query) > -1);
           });
           if (!items.length) return;
           total += items.length;
