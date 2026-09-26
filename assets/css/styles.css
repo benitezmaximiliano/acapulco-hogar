@@ -193,6 +193,7 @@ p{margin:0 0 1em}
 .card-body{display:flex;flex-direction:column;gap:.5rem;padding:1rem 1.05rem 1.1rem;flex:1}
 .card h3{font-size:1.4rem;line-height:1.12}
 .card .dims{font-size:.86rem;color:var(--muted);margin:0;line-height:1.45}
+.card .desc{font-size:.9rem;color:var(--ink);margin:0;line-height:1.5;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
 .card .notes{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
 .card .notes li{font-size:.74rem;background:var(--sand);color:var(--olive-d);padding:.28em .7em;border-radius:999px;letter-spacing:.02em}
 .price{margin-top:auto;padding-top:.4rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .55rem}
